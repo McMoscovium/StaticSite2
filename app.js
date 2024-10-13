@@ -1,14 +1,30 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
+const fs = require("fs");
 
-app.get("/", (req, res) => res.type('html').send(html));
+var htmlData;
 
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+//index.htmlを読み込み、htmlDataに格納
+fs.readFile("./index.html", "utf-8", function (err, data) {
+  if (err) {
+    console.error("index.htmlの読み込みに失敗", err);
+    return;
+  }
+
+  htmlData = data;
+});
+
+//GETリクエストが来たときのレスポンス
+app.get("/", (req, res) => res.type('html').send(htmlData));
+
+const server = app.listen(port, () => console.log(`オレが作った app listening on port ${port}!`));
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
 
+//公式リポジトリをフォークしたときについてきたサンプルhtml
 const html = `
 <!DOCTYPE html>
 <html>
