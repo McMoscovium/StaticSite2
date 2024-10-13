@@ -12,12 +12,22 @@ fs.readFile("./index.html", "utf-8", function (err, data) {
     console.error("index.htmlの読み込みに失敗", err);
     return;
   }
-
+  console.log("index.htmlの読み込みに成功");
   htmlData = data;
 });
 
 //GETリクエストが来たときのレスポンス
-app.get("/", (req, res) => res.type('html').send(htmlData));
+app.get("/", (req, res) => {
+  fs.readFile("./index.html", "utf-8", (err, data) => {
+    if (err) {
+      console.error("index.htmlの読み込みに失敗", err);
+      res.status(500).send("Internal Server Error");
+      return;
+    }
+    console.log("index.htmlの読み込みに成功");
+    res.send(data);
+  });
+});
 
 const server = app.listen(port, () => console.log(`オレが作った app listening on port ${port}!`));
 
