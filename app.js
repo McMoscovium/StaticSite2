@@ -5,20 +5,11 @@ const fs = require("fs");
 
 var htmlData;
 
-
-//index.htmlを読み込み、htmlDataに格納
-fs.readFile("./index.html", "utf-8", function (err, data) {
-  if (err) {
-    console.error("index.htmlの読み込みに失敗", err);
-    return;
-  }
-  console.log("index.htmlの読み込みに成功");
-  htmlData = data;
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 //GETリクエストが来たときのレスポンス
 app.get("/", (req, res) => {
-  fs.readFile("./index.html", "utf-8", (err, data) => {
+  fs.readFile("./public/index.html", "utf-8", (err, data) => {
     if (err) {
       console.error("index.htmlの読み込みに失敗", err);
       res.status(500).send("Internal Server Error");
