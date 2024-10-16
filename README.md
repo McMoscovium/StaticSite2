@@ -1,6 +1,6 @@
 # README
 
-https://itsuka-kita-michi.onrender.comに行ったら見れる
+https://itsuka-kita-michi.onrender.com に行ったら見れる
 
 This is the [Express](https://expressjs.com) [Hello world](https://expressjs.com/en/starter/hello-world.html) example on [Render](https://render.com).
 
